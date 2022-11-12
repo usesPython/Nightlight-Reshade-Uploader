@@ -32,19 +32,32 @@ if not api_key:
     sys.exit("ERROR: No API key passed.\n{}".format(usage_string))
 
 #Handle the duplicate filtered screenshot if necessary
-if no_original:
-    os.remove(filename)
-    
+def find_orig(path):
     #Get the filename of the non-filtered screenshot
-    i = filename.rfind(".")
+    i = path.rfind(".")
     if i == -1:
-        i = len(filename)
-    orig_filename = "{} original{}".format(filename[:i], filename[i:])
-    
-    if not os.path.isfile(orig_filename): #New file means new sanity checks
-        sys.exit("ERROR: {} is not a file.\n{}".format(filename, usage_string))
-    
-    os.rename(orig_filename, filename) #Rename the file to read the correct timestamp
+        i = len(path)
+    orig_path = "{} original{}".format(path[:i], path[i:])
+    return orig_path
+
+if no_original:
+    try:
+        os.remove(filename)
+    except:
+        print("WARNING: Could not remove {}, skipping deletion and renaming. Attempting to find unfiltered image".format(filename))
+        orig_filename = find_orig(filename)
+        if not os.path.isfile(orig_filename): #New file means new sanity checks
+            sys.exit("ERROR: {} is not a file. Check that you have \"Save before and after images\" enabled in reshade and that you are passing the filtered screenshot.\n{}".format(filename, usage_string))
+        filename = orig_filename
+    else:
+        orig_filename = find_orig(filename)
+        if not os.path.isfile(orig_filename): #New file means new sanity checks
+            sys.exit("ERROR: {} is not a file.\n{}".format(filename, usage_string))
+        try:
+            os.rename(orig_filename, filename) #Rename the file to read the correct timestamp
+        except:
+            print("WARNING: Could not rename {} to {}. Skipping.".format(orig_filename, filename))
+            filename = orig_filename
     
 
 #Prepare for sending the image
