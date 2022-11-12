@@ -1,5 +1,5 @@
 import sys
-import os.path
+import os
 import requests
 import json
 import webbrowser
