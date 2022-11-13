@@ -1,7 +1,7 @@
 # Nightlight Reshade Uploader
 ## Setup Guide
 ### Step 1: Download the .exe
-Download the latest nightlight_upload.exe from https://github.com/usesPython/Nightlight-Reshade-Uploader/releases/tag/release and save it somewhere
+Download the latest nightlight_upload.exe from [here](https://github.com/usesPython/Nightlight-Reshade-Uploader/releases) and save it somewhere
 
 ### Step 2: Get a Nightlight API key
 Go to https://nightlight.gg/account/api and make a new API token, making sure to give it upload permissions. Copy the API key you get when you generate it, you'll need it later
@@ -35,7 +35,7 @@ Set Post-save command arguments to be -a=YOUR_API_KEY %DateYear%%DateMonth%%Date
 ![Example settings](/images/example_settings.png)
 
 ## Building from the source code
-If you're a regular user you can skip this part and just grab the .exe from https://github.com/usesPython/Nightlight-Reshade-Uploader/releases/tag/release
+If you're a regular user you can skip this part and just grab the .exe from [here](https://github.com/usesPython/Nightlight-Reshade-Uploader/releases)
 
 This assumes you have a working version of Python set up, get the requests library with
 ```
